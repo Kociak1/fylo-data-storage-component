@@ -1,0 +1,184 @@
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap");
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+}
+
+$Pale-Blue: hsl(243, 100%, 93%);
+$Grayish-Blue: hsl(229, 7%, 55%);
+$Dark-Blue: hsl(228, 56%, 26%);
+$Very-Dark-Blue: hsl(229, 57%, 11%);
+
+@mixin bkg($url) {
+  background: url($url);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+@mixin align-center() {
+  display: flex;
+  align-items: center;
+  border-radius: 1rem;
+}
+
+body {
+  margin: 0;
+  font-family: "Raleway", sans-serif;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  @include bkg("./images/bg-mobile.png");
+}
+
+html {
+  font-size: 14px;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.logo {
+  padding-bottom: 2rem;
+}
+
+.colA,
+.colB {
+  background-color: $Dark-Blue;
+  color: $Pale-Blue;
+  padding: 3rem;
+  border-radius: 0.5rem;
+}
+
+.btns {
+  display: flex;
+  gap: 1rem;
+}
+.btn {
+  padding: 1rem;
+  background-color: $Very-Dark-Blue;
+  @include align-center();
+  transition: opacity 0.5s ease;
+
+  &:hover {
+    cursor: pointer;
+    opacity: 0.8;
+  }
+}
+
+.colA {
+  border-top-right-radius: 8rem;
+}
+
+.value {
+  font-weight: bold;
+}
+
+.progress {
+  width: 100%;
+  height: 1.5rem;
+  background-color: $Very-Dark-Blue;
+  border-radius: 1rem;
+  overflow: hidden;
+
+  .line {
+    width: 12%;
+    min-width: max-content;
+    height: 100%;
+    background: linear-gradient(
+      to right,
+      rgb(255, 159, 149),
+      rgb(255, 76, 144)
+    );
+    border-radius: 3rem;
+    padding: 0.2rem;
+
+    .circle {
+      height: 100%;
+      aspect-ratio: 1 / 1;
+      background-color: white;
+      border-radius: 2rem;
+      margin-left: auto;
+    }
+  }
+}
+
+.labels {
+  padding-top: 0.5rem;
+  width: 100%;
+  display: inline-flex;
+  justify-content: space-between;
+}
+
+.colB {
+  position: relative;
+  padding-bottom: 5rem;
+
+  .box {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 50%);
+
+    background-color: white;
+    border-radius: 1rem;
+    color: $Grayish-Blue;
+    width: max-content;
+
+    .pudlo {
+      padding: 1rem 2rem;
+      @include align-center();
+      position: relative;
+    }
+
+    span {
+      color: black;
+      font-size: 3rem;
+    }
+  }
+}
+
+@media (min-width: 1440px) {
+  body {
+    @include bkg("./images/bg-desktop.png");
+  }
+
+  main {
+    flex-direction: row;
+    align-items: flex-end;
+    gap: 2rem;
+  }
+
+  .colA {
+    min-width: 350px;
+  }
+
+  .colB {
+    padding-bottom: 3rem;
+    min-width: 600px;
+
+    .box {
+      top: 0;
+      right: 0;
+      left: unset;
+      bottom: unset;
+      transform: translate(-3rem, -50%);
+      border-bottom-right-radius: 0;
+    }
+
+    .pudlo::after {
+      position: absolute;
+      content: "";
+      width: 2rem;
+      height: 2rem;
+      background: linear-gradient(45deg, transparent 50%, white 0);
+      bottom: 0;
+      right: 0;
+      transform: translateY(calc(100% - 1px));
+    }
+  }
+}
